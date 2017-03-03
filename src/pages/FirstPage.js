@@ -1,10 +1,9 @@
 import React, {Component} from "react";
 import "../App.css";
-import Footer from "./Footer";
-import Header from "./Header";
-import Input from "./Input";
-
-export default class App extends React.Component {
+import Footer from "../components/Footer";
+import Header from "../components/Header";
+import Input from "../components/Input";
+export default class FirstPage extends React.Component {
 
     constructor(props) {
         super(props);
@@ -25,7 +24,5 @@ export default class App extends React.Component {
         </div>);
     }
 
-    _addImage = (logo) => {
-        this.setState({logo});
-    };
+
 }
