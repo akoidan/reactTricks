@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Wo3rld!</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
+</head>
+<body>
+<div id="content"></div>
+
+
+<script type="text/babel">
+
+    var CONTACTS = [{
+        id: 1,
+        name: 'sd',
+        phone: 3
+
+    }, {
+        id: 2,
+        name: 'sdfs',
+        phone: 34
+    },
+        {
+            id: 3,
+            name: 'sdfsd',
+            phone: 32
+        }
+    ];
+
+    var Contact = React.createClass({
+        render: function() {
+            return (
+                    <li className="contact">
+                            <div className="contact-name"> {this.props.contact.name} </div>
+                            <div className="contact-number"> {this.props.contact.phone} </div>
+                    </li>
+            );
+        }
+    });
+
+    var ContactList = React.createClass({
+        handleSearch: function (e) {
+            var searchQuery = e.target.value.toLowerCase();
+            var displayedContacts = CONTACTS.filter(function (e) {
+                return e.name.toLocaleString().indexOf(searchQuery) >= 0;
+            });
+            this.setState({displayedContacts: displayedContacts});
+        },
+
+        getInitialState: function () {
+            return {
+                displayedContacts: CONTACTS
+            }
+
+        },
+
+        render: function () {
+
+            return (<div>
+                        <input type="search" onChange={this.handleSearch}/>
+                        <ul>
+                            {
+                                this.state.displayedContacts.map(function (el) {
+                                        return <Contact key={el.id} contact={el}/>;
+                                    }
+                                )
+                            }
+                        </ul>
+                    </div>
+            );
+        }
+    });
+
+    ReactDOM.render(
+            <ContactList name="sdf"/>,
+        document.getElementById('content')
+    );
+</script>
+</body>
+</html>
