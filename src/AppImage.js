@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
+
 import './App.css';
 import ImageUploader from './components/ImageLoader'
 
-class App extends React.Component {
+export default class AppImage extends React.Component {
 
     constructor(props) {
         super(props);
@@ -21,10 +21,6 @@ class App extends React.Component {
     render() {
         return (
             <div className="App">
-                <div className="App-header">
-                    <img src={logo} className="App-logo" alt="logo"/>
-                    <h2>Welcome to Reac322t2</h2>
-                </div>
                 <ImageUploader
                     title="Upload company logo"
                     addImage={this._addImage}
@@ -39,4 +35,3 @@ class App extends React.Component {
     };
 }
 
-export default App;

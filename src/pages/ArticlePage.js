@@ -1,10 +1,11 @@
 import React, {Component} from "react";
 import "../App.css";
 
-export default class SecondPage extends React.Component {
+export default class ArticlePage extends React.Component {
 
     constructor(props) {
         super(props);
+        console.log(props.location)
 
     }
 
@@ -14,7 +15,7 @@ export default class SecondPage extends React.Component {
 
     render() {
         return (<div>
-            This is another page
+            This is article page
         </div>);
     }
 

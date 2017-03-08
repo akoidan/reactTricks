@@ -26,3 +26,15 @@
 a {
  margin: 10px;
 }
+
+
+
+.icon {
+  display: block;
+  width: 100%;
+  height: 100px;
+  background-image: url("./logo.svg")!important;
+  background-repeat: no-repeat!important;
+  background-size: contain!important;
+  background-position: center!important;
+}

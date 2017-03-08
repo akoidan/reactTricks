@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Dropzone from 'react-dropzone';
 // import classes from '../../layouts/CoreLayout/CoreLayout.scss';
 
-export class ImageUploader extends Component {
+export default class ImageUploader extends Component {
     allowedTypes = [
         'image/jpeg',
         'image/gif',
@@ -19,11 +19,6 @@ export class ImageUploader extends Component {
 
     onDrop = (accepted, rejected) => {
         if (rejected.length > 0 ) {
-            if (!~this.allowedTypes.indexOf(rejected[0].type))
-                return alert(`File type isn't supported. Supported types: ${this.allowedTypes.join(", ")}.`);
-            if (rejected[0].size > this.allowedSize)
-                return alert(`File is too big. Allowed size: ${this.allowedSize} bytes.`);
-            console.log(rejected);
             return alert("Something went wrong.");
         }
         return this.props.addImage(accepted[0]);
@@ -72,5 +67,3 @@ export class ImageUploader extends Component {
         );
     }
 }
-
-export default ImageUploader;
