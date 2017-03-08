@@ -25,16 +25,15 @@ export default class Flux extends React.Component {
     this.setState({name});
   }
 
-  createTodo(e) {
-    TodoActions.createTodo(Date.now());
+  reloadTodos() {
+    TodoActions.reloadTodos();
   }
 
   render() {
     const {todos} = this.state;
     let todosRendered = todos.map(e => <Todo todo={e}/>);
     return (<div>
-      <input type="text"/>
-      <button className="btn btn-info" onClick={this.createTodo.bind(this)}>Create TODO</button>
+      <button className="btn btn-info" onClick={this.reloadTodos.bind(this)}>Reload</button>
       <h1>Here goes todo list</h1>
       <ul>{todosRendered}</ul>
     </div>);
