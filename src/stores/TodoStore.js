@@ -17,11 +17,21 @@ class TodoStore extends EventEmitter {
     console.log(this.name);
   }
 
+  createTodo(text) {
+    const id = Date.now();
+    this.todos.push({
+      id, text, completed: false
+    });
+    this.emit('change')
+  }
+
   getAll() {
     return this.todos;
   }
 }
 
 const todoStore = new TodoStore('default');
-
+window.todoStore = todoStore;
+// this allows to print in browser console
+//todoStore.createTodo('sd');
 export default todoStore;

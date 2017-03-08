@@ -12,6 +12,14 @@ export default class Flux extends React.Component {
     }
   }
 
+  // fires only the first time component adds to the dom (once)
+  // inherited from Component
+  componentWillMount() {
+    TodoStore.on("change", () => {
+      this.setState({todos: TodoStore.getAll()})
+    });
+  }
+
   changeName(name) {
     this.setState({name});
   }
