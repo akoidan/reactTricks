@@ -1,12 +1,35 @@
 import {applyMiddleware, combineReducers, createStore} from "redux"
+import logger from "redux-logger";
+import thunk from "redux-thunk"
 
-const userReducer = function (state = {}, action) {
+const initialState = {
+  fetching: false,
+  fetched: false,
+  user: {},
+  error: null
+};
+
+const userReducer = function (state = initialState, action) {
   switch (action.type) {
     case "CHANGE_NAME":
-      state = {...state, name: action.payload};
+      state = {
+        ...state,
+        fetching: false,
+        user: {...state.user, name: action.payload}
+      };
       break;
     case "CHANGE_AGE":
-      state = {...state, age: action.payload};
+      state = {
+        ...state,
+        fetching: false,
+        user: {...state.user, age: action.payload}
+      };
+      break;
+    case "USER_LOADING":
+      state = {
+        ...state,
+        fetching: true
+      };
       break;
     case "EEE":
       throw "EEE type";
@@ -19,7 +42,7 @@ const tweetReducer = function (state = [], action) {
 };
 
 
-const logger = store => next => action => {
+const myLogger = store => next => action => {
   console.log("Action fired", action);
   //action.type = "CHANGE_NAME";
   next(action);
@@ -34,7 +57,7 @@ const error = store => next => action => {
 };
 
 
-const middleware = applyMiddleware(logger, error);
+const middleware = applyMiddleware(thunk, logger(), error, myLogger);
 
 const reducer = combineReducers(
   {user: userReducer, tweet: tweetReducer}
@@ -47,5 +70,10 @@ store.subscribe(() => {
 
 store.dispatch({type: "CHANGE_NAME", payload: "will"});
 store.dispatch({type: "CHANGE_AGE", payload: 35});
-store.dispatch({type: "CHANGE_AGE", payload: 36});
-store.dispatch({type: "EEE", payload: 36});
+
+store.dispatch(dispatch => {
+  store.dispatch({type: "USER_LOADING"});
+  setTimeout(() => { //
+    store.dispatch({type: "CHANGE_AGE", payload: 36});
+  }, 3000);
+});
