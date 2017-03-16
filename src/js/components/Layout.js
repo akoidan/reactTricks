@@ -18,7 +18,10 @@ export default class Layout extends React.Component {
 
   componentWillMount() {
     console.log(fecthUser);
-    this.props.fecthUser()
+
+    setTimeout(() => {
+      this.props.fecthUser()
+    }, 2000);
   }
 
   changeTitle(title) {
@@ -26,9 +29,9 @@ export default class Layout extends React.Component {
   }
 
   render() {
-    console.log(this.props.user);
     return (
       <div>
+        <span style={{color: 'red'}}>{this.props.user.name}</span>
         <Header changeTitle={this.changeTitle.bind(this)} title={this.state.title} />
         <Footer />
       </div>

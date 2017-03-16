@@ -1,7 +1,7 @@
 export default (state = {
   fetching: false,
   fetched: false,
-  user: {},
+  user: {name: "Initial"},
   error: null
 }, action) => {
   switch (action.type) {
