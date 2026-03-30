@@ -1,0 +1,59 @@
+
+<html lan="en">
+<head>
+    <title>A JSON exercise</title>
+
+    <style>
+        #OutputArea {
+            display: block;
+            width: 400px;
+            height: 600px;
+            margin-top: 25px;
+            border: 2px solid buttonface;
+            overflow-y: auto;
+        }
+
+        #FileInput {
+            display: block;
+            margin: 10px;
+            padding: 5px;
+            color: blue;
+        }
+
+        #InputArea:hover,
+        #InputArea:focus {
+            color: red;
+        }
+
+    </style>
+    <script>
+        function listener() {
+            document.getElementById('FileInput').addEventListener('change', readFile, false);
+        }
+        function readFile(){
+            var f = {}, fr = {}, file = "", obj = {}, FHCClassSchedule = {};
+            f = document.getElementById('FileInput').files[0];
+            fr = new FileReader();
+            fr.onload = function(e){
+                var el = document.getElementById('OutputArea');
+                el.innerHTML += "files[0] : " + f +"<br><br>" + "file : " + fr.result;
+                objectifyJSONStr(fr.result);
+            };
+            fr.readAsText(f);
+        }
+        function objectifyJSONStr(file){
+            FHCClassSchedule = JSON.parse(file);
+            var el = document.getElementById('OutputArea');
+            el.innerHTML += "FHCClassSchedule.time : " + FHCClassSchedule.time + "<br>" +
+                "FHCClassSchedule.instructorImgHref : " +
+                FHCClassSchedule.instructorImgHref + "<br>";
+        }
+    </script>
+</head>
+<body onload="listener()">
+
+<input id="FileInput" name="files[]" type="file" accept="application/json" />
+<output id="OutputArea"></output>
+
+</body>
+</html>
